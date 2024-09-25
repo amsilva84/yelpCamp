@@ -1,0 +1,83 @@
+<% layout('layouts/boilerplate') %>
+<H1 class="text-center"><%= foundCamp.tittle %></H1>
+
+<!-- bootstrap card -->
+
+<div class="row">
+<div class="col-6">
+    <div class="card">
+        <img src="<%= foundCamp.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Description</h5>
+          <p class="card-text"><%= foundCamp.description %>.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">$<%= foundCamp.price %>/night </li>
+          <li class="list-group-item"><%= foundCamp.location %></li>
+          <li class="list-group-item">Created by: <%= foundCamp.owner.username %></li>
+          <!-- <li class="list-group-item">A third item</li> -->
+        </ul>
+        <!-- if logged in user and the owner is the same as the logged in user display the buttons -->
+        <% if (loggedUser && foundCamp.owner.equals(loggedUser)) {%>
+        <div class="card-body">
+            <a href="/campgrounds/<%=foundCamp._id%>/edit" class="card-link btn btn-primary">Edit</a>
+          <!-- <a href="/campgrounds" class="card-link btn btn-secondary">Go Back</a> -->
+            <form action="/campgrounds/<%= foundCamp._id %>?_method=DELETE" method="POST" class="d-inline">
+            <button class="btn btn-danger">Delete</button>
+            </form> 
+        </div>   
+        <% } %>   
+    </div>
+    </div>
+    <div class="col-6">
+        <% if(loggedUser){%>
+        <!-- place the reviews on a separate column -->
+         <h3>Leave a review!</h3>
+    <!-- client side validation for empty use the required and the novalidate so bootstrap takes over -->
+        <form action="/campgrounds/<%=foundCamp._id %>/reviews" class="mb-3 bootstrap-validate" method="post" novalidate>
+            <div class="mb-3">
+                 <label for="rating">Rating</label>
+                <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="body">Review</label>
+                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+            </div>
+            <button class="btn btn-success">Save</button>
+        </form>
+        <% } %>
+    <!-- loop all reviews outside the review form -->
+        <% for (let review of foundCamp.reviews) { %>
+        <div class="card mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">Rating: <%= review.rating %></h5> 
+                <p class="card-text">Review: <%= review.body %></p>
+                
+                <!-- form and button to delete each review. review_id is coming from the let review loop -->
+                <form action="/campgrounds/<%= foundCamp._id%>/reviews/<%= review._id %>?_method=delete" method='post'>
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div> 
+        </div>
+        <% } %>
+    
+    </div>
+
+</div>
+
+    
+     
+       
+
+
+
+
+
+
+
+
+
+
+
+
+       

@@ -1,0 +1,73 @@
+
+
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <h1 class="text-center">New Campground</h1>
+    <div class="col-6 offset-3">
+        <form action="/campgrounds" method="POST" novalidate class="bootstrap-validate">
+            <div class="mb-3">
+                <label for="tittle" class="form-label">Title</label>
+                <input type="text" id="tittle" name="campground[tittle]" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please enter a name!
+                  </div>
+            </div>
+                <!-- required added for client validation but in this case we are using bootstrap so novalidate is required on the form above -->
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input class="form-control" id="location" name="campground[location]" type="text" required>
+                    <div class="invalid-feedback">
+                        Please add a location!
+                      </div>
+                      
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input class="form-control" id="image" name="campground[image]" type="text" required>
+                    <div class="invalid-feedback">
+                        Please add a picture!
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" name="campground[description]" required></textarea>
+                    <div class="invalid-feedback">
+                        Please add a description!
+                      </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="price-label">$</span>
+                        <input type="text" class="form-control" placeholder="0.00" aria-label="Price" aria-describedby="price-label" id="price" name="campground[price]" required>
+                        <div class="invalid-feedback">
+                            Please add a price!
+                          </div>
+                    </div>
+                  
+                </div>
+                  
+                
+                <div class="mb-3">
+                    <button class="btn btn-success">Save</button>
+                </div>
+            
+                
+    
+    
+        </form>
+        
+        
+        <a class="btn btn-secondary" href="/campgrounds/">Cancel</a>     
+
+
+        <!-- <a href="/campgrounds">Cancel</a> -->
+    </div>
+
+</div>
+
+
+
+    
+

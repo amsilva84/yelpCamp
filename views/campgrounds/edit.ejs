@@ -1,0 +1,63 @@
+<% layout('layouts/boilerplate') %>
+   <h1 class="text-center">Editing <%= foundCamp.tittle %></h1>
+<form action="/campgrounds/<%= foundCamp._id %>?_method=PUT" method="POST" novalidate class="bootstrap-validate"> 
+<div class="col-6 offset-3">
+    <!-- tittle -->
+    <div class="mb-3">
+        <label for="tittle" class="form-label">Name</label>
+        <input type="text" id="tittle" name="foundCamp[tittle]" class="form-control"  value="<%= foundCamp.tittle %>" required>
+    </div>
+    <!-- location -->
+    <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" id="location" name="foundCamp[location]" class="form-control"  value="<%= foundCamp.location %>" required>
+    </div>
+    <!-- description -->
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="foundCamp[description]" required><%= foundCamp.description %></textarea>
+    </div>
+    <!-- price -->
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+            <div class="input-group">
+                <span class="input-group-text" id="price-label">$</span>
+                <input type="text" class="form-control" placeholder="0.00" aria-label="Price" aria-describedby="price-label" id="price" name="foundCamp[price]" value="<%= foundCamp.price %>" required>
+            </div>
+        </div>
+        <!-- image -->
+        <div class="mb-3">
+            <label for="image" class="form-label">Image URL</label>
+            <input class="form-control" id="image" name="foundCamp[image]" type="text" value="<%= foundCamp.image %>" required>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-success">Save</button>
+        </div>
+        <a class="btn btn-secondary" href="/campgrounds/">Cancel</a>     
+</div>
+
+</form> 
+   
+<script>
+    
+    // client side validation form using bootstrap!
+        (() => {
+      'use strict'
+    
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.bootstrap-validate')
+    
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+    
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+    </script>
+  
